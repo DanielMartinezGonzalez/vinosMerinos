@@ -4,16 +4,26 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Vino")
+@Table(name = "VINO")
+@NamedQueries({
+@NamedQuery(
+name = "Vino.findByDenomincacionOrdenadoNombreDesc",
+query = "SELECT v FROM Vino v WHERE v.denominacion = ?1 ORDER BY v.nombreComercial DESC"),
+@NamedQuery(
+name = "Vino.findByDenominacionYCategoria",
+query = "SELECT v FROM Vino v WHERE v.denominacion = ?1 AND v.categoria = ?2")})
 public class Vino {
 
     @Id
     @GeneratedValue
     private Integer Id;
-    private String nombre_comercial;
+    @Column(name = "nombre_omercial")
+    private String nombreComercial;
     private String denominacion;
     private String categoria;
     @Column(nullable = false)
@@ -24,7 +34,7 @@ public class Vino {
     }
 
     Vino(String nombre_comercial, String denominacion, String categoria, Float precio, Integer bodega) {
-        this.nombre_comercial = nombre_comercial;
+        this.nombreComercial = nombre_comercial;
         this.denominacion = denominacion;
         this.categoria = categoria;
         this.precio = precio;
@@ -39,12 +49,13 @@ public class Vino {
         this.Id = Id;
     }
 
-    public String getNombre_comercial() {
-        return this.nombre_comercial;
+    
+    public String getNombreComercial() {
+        return this.nombreComercial;
     }
 
     public void setNombre_comercial(String nombre_comercial) {
-        this.nombre_comercial = nombre_comercial;
+        this.nombreComercial = nombre_comercial;
     }
 
     public String getDenominacion() {
