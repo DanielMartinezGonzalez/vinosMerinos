@@ -1,5 +1,6 @@
 package com.uva.users.Model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ public class Vino {
     private String nombre_comercial;
     private String denominacion;
     private String categoria;
+    @Column(nullable = false)
     private Float precio;
     private Integer bodega_id;
 
